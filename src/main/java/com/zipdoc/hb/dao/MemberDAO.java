@@ -26,16 +26,12 @@ public class MemberDAO {
 		return sqlSession.insert("member.insertMember", param);
 	}
 	public String selectUserPw(String userId) {
-		Map param = new HashMap();
-		param.put("userId", userId);
 		
-		return sqlSession.selectOne("member.selectUserPw", param);
+		return sqlSession.selectOne("member.selectUserPw", userId);
 	}
 	public String selectUID(String userId) {
-		Map param = new HashMap();
-		param.put("userId", userId);
 		
-		return sqlSession.selectOne("member.selectUID", param);
+		return sqlSession.selectOne("member.selectUID", userId);
 	}
 	
 }
