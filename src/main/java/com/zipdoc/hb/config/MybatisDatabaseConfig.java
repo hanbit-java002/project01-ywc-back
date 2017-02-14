@@ -5,6 +5,7 @@ import org.apache.tomcat.jdbc.pool.DataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,12 +17,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.mysql.jdbc.Driver;
 
 @Configuration
+@EnableAutoConfiguration
 @EnableTransactionManagement
 public class MybatisDatabaseConfig {
 	@Autowired
 	private ApplicationContext applicationContext;
 	
-	@Bean(destroyMethod="close")
+/*	@Bean(destroyMethod="close")
 	public DataSource dataSource() {
 		DataSource dataSource = new DataSource();
 		dataSource.setDriverClassName(Driver.class.getName());
@@ -30,7 +32,7 @@ public class MybatisDatabaseConfig {
 		dataSource.setUsername("zipdoc");
 		dataSource.setPassword("zipdoc");
 		return dataSource;
-	}
+	}*/
 	@Bean
 	public PlatformTransactionManager transactionManager(DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);
