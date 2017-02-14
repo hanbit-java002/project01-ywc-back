@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+  <insert id="insertMember" parameterType="map">
+    INSERT INTO tbl_member 
+    	(uid, user_id, user_pw, user_name, user_phone, user_nickname, create_dt)
+	VALUES
+	(#{uid},#{userId},#{userPw},#{userName},#{userPhone},#{userNickname}, DATE_FORMAT(NOW(),"%Y%m%d%H%i%s"));
+  </insert>
+  
+  <select id="selectUserPw" parameterType="String" resultType="String">
+  	SELECT user_pw 
+  	  FROM tbl_member 
+  	 WHERE user_id=#{userId};
+  </select>
+  
+  <select id="selectUID" parameterType="String" resultType="String">
+  	SELECT uid 
+  	  FROM tbl_member 
+  	 WHERE user_id=#{userId};
+  </select>
+  
+</mapper>
