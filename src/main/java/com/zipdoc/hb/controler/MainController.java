@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.zipdoc.hb.service.MainService;
 
 @Controller
-public class MainControler {
+public class MainController {
 	@Autowired private MainService mainService;
 	
 	@RequestMapping("/api/header/setdetails")

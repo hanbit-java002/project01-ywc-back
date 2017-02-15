@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.zipdoc.hb.service.MemberService;
 
 @Controller
-public class MemberControler {
+public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
