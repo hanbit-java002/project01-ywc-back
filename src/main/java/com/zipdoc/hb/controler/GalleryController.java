@@ -18,7 +18,7 @@ public class GalleryController {
 	
 	@RequestMapping("/api/gallery/totalcount")
 	@ResponseBody
-	public int GalleryTotalCount() {
+	public String GalleryTotalCount() {
 		return galleryService.getAllCount();
 	}
 	

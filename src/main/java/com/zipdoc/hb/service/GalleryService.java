@@ -14,7 +14,7 @@ public class GalleryService {
 	@Autowired
 	private GalleryDAO galleryDAO;
 	
-	public int getAllCount() {
+	public String getAllCount() {
 		return galleryDAO.getAllCount();
 	}
 	
@@ -25,8 +25,6 @@ public class GalleryService {
 	
 	public List<Map <String, Object>> getGalleryLists(int pager, int viewItems) {
 		int startIndex= getStartIndex(pager,viewItems);
-		
-		
 		Map listInfo = new HashMap();
 		listInfo.put("startIndex", startIndex);
 		listInfo.put("viewItems", viewItems);

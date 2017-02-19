@@ -12,7 +12,7 @@ public class GalleryDAO {
 	@Autowired
 	SqlSession sqlSession;
 	
-	public int getAllCount() {
+	public String getAllCount() {
 		return sqlSession.selectOne("gallery.count");
 	}
 	public List<Map<String,Object>> getGalleryLists(Map listInfo) {
