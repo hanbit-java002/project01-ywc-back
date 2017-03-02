@@ -30,5 +30,11 @@ public class GalleryController {
 		return galleryService.getGalleryLists(pager,viewItems);
 	}
 	
+	@RequestMapping("/api/gallery/main/img")
+	@ResponseBody
+	public Map GalleryMainImg(@RequestParam("galleryId") String galleryId) {
+		return galleryService.getGalleryMainImg(galleryId);
+	}
+	
 
 }

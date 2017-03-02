@@ -24,5 +24,10 @@
   	ORDER BY gallery_id ASC
   	LIMIT #{startIndex}, #{viewItems}
   </select>
+  <select id="mainimg" resultType="map" parameterType="string">
+  	SELECT gallery_imgs as mainimg
+  	  FROM zipdoc.tbl_gallery_imgs 
+  	 WHERE gallery_main_img=true and gallery_id=#{galleryId};
+  </select>
   
 </mapper>

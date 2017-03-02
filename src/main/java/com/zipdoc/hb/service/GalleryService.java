@@ -30,5 +30,8 @@ public class GalleryService {
 		listInfo.put("viewItems", viewItems);
 		return galleryDAO.getGalleryLists(listInfo);
 	}
+	public Map getGalleryMainImg (String galleryId) {
+		return galleryDAO.getGalleryMainImg(galleryId);
+	}
 
 }
