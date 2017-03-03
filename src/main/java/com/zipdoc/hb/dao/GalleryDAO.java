@@ -19,8 +19,8 @@ public class GalleryDAO {
 		
 		return sqlSession.selectList("gallery.lists", listInfo);
 	}
-	public Map getGalleryMainImg(String galleryId) {
-		return sqlSession.selectOne("gallery.mainimg", galleryId);
+	public List<Map<String, Object>> getGalleryMainImg(Map listInfo) {
+		return sqlSession.selectList("gallery.mainimg", listInfo);
 	}
 
 }

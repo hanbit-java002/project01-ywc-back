@@ -9,25 +9,26 @@
   </select>
   <select id="lists" resultType="map" parameterType="map">
 	SELECT 	gallery_id AS galleryid,
-		gallery_watcher AS watcher,
-		gallery_favor AS favor,
-		gallery_clip AS clip,
-		gallery_title AS title,
-		gallery_addr AS addr,
-		gallery_size AS size,
-		gallery_type AS type,
-		gallery_cost AS cost,
-		gallery_terms AS terms,
-		gallery_method AS method,
-		gallery_partnerid AS partnerid
+			gallery_watcher AS watcher,
+			gallery_favor AS favor,
+			gallery_clip AS clip,
+			gallery_title AS title,
+			gallery_addr AS addr,
+			gallery_size AS size,
+			gallery_type AS type,
+			gallery_cost AS cost,
+			gallery_terms AS terms,
+			gallery_method AS method,
+			gallery_partnerid AS partnerid
   	FROM zipdoc.tbl_gallery 
   	ORDER BY gallery_id ASC
   	LIMIT #{startIndex}, #{viewItems}
   </select>
-  <select id="mainimg" resultType="map" parameterType="string">
-  	SELECT gallery_imgs as mainimg
-  	  FROM zipdoc.tbl_gallery_imgs 
-  	 WHERE gallery_main_img=true and gallery_id=#{galleryId};
+  <select id="mainimg" resultType="map" parameterType="map">
+  	select 	gallery_id as galleryid, gallery_imgs as mainimg 
+  	  from 	zipdoc.tbl_gallery_imgs 
+  	 where 	gallery_main_img=true 
+  	 limit 	#{startIndex}, #{viewItems};
   </select>
   
 </mapper>

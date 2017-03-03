@@ -32,8 +32,8 @@ public class GalleryController {
 	
 	@RequestMapping("/api/gallery/main/img")
 	@ResponseBody
-	public Map GalleryMainImg(@RequestParam("galleryId") String galleryId) {
-		return galleryService.getGalleryMainImg(galleryId);
+	public List<Map<String, Object>> GalleryMainImg(@RequestParam("pager") int pager, @RequestParam("viewItems") int viewItems) {
+		return galleryService.getGalleryMainImg(pager, viewItems);
 	}
 	
 
