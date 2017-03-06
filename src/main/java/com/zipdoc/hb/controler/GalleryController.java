@@ -15,7 +15,7 @@ import com.zipdoc.hb.service.GalleryService;
 public class GalleryController {
 	@Autowired
 	private GalleryService galleryService;
-	
+	 
 	@RequestMapping("/api/gallery/totalcount")
 	@ResponseBody
 	public String GalleryTotalCount() {

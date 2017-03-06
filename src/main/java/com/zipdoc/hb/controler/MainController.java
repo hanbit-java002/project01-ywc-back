@@ -14,7 +14,7 @@ import com.zipdoc.hb.service.MainService;
 @Controller
 public class MainController {
 	@Autowired private MainService mainService;
-	
+	 
 	@RequestMapping("/api/header/setdetails")
 	@ResponseBody
 	public void headerSet(@RequestParam("headerDetails") String headerDetails) {	

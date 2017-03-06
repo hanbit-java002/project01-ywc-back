@@ -18,7 +18,7 @@ import com.zipdoc.hb.service.MemberService;
 @Controller
 public class MemberController {
 	
-	@Autowired
+	@Autowired 
 	private MemberService memberService;
 	@RequestMapping(value="/api/member/register", method=RequestMethod.POST)
 	@ResponseBody

@@ -6,7 +6,7 @@
   <select id="count" resultType="string">
   	SELECT count(gallery_id) 
   	  FROM zipdoc.tbl_gallery;
-  </select>
+  </select> 
   <select id="lists" resultType="map" parameterType="map">
 	SELECT 	gallery_id AS galleryid,
 			gallery_watcher AS watcher,
