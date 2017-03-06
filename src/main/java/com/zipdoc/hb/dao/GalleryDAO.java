@@ -22,5 +22,15 @@ public class GalleryDAO {
 	public List<Map<String, Object>> getGalleryMainImg(Map listInfo) {
 		return sqlSession.selectList("gallery.mainimg", listInfo);
 	}
+	public List<Map<String, Object>> getGalleryImgs(int galleryId) {
+		return sqlSession.selectList("gallery.imgs", galleryId);
+	}
+	public List<Map<String, Object>> GalleryDetailsInfo(int galleryId) {
+		return sqlSession.selectList("gallery.detailsinfo", galleryId);
+	}
+	public List<Map<String, Object>> GalleryPartner(int galleryId) {
+		return sqlSession.selectList("gallery.partner", galleryId);
+	}
+
 
 }

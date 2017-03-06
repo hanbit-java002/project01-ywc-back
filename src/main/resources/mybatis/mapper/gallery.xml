@@ -30,5 +30,43 @@
   	 where 	gallery_main_img=true 
   	 limit 	#{startIndex}, #{viewItems};
   </select>
+  <select id="imgs" resultType="map" parameterType="int">
+  	select gallery_id as galleryid , gallery_imgs as galleryimgs 
+  	from tbl_gallery_imgs 
+  	where gallery_id=#{galleryId};
+  </select>
+  <select id="detailsinfo" resultType="map" parameterType="int">
+  	select 
+		tbl_gallery.gallery_id as galleryid, 
+		tbl_gallery.gallery_watcher as watcher,
+		tbl_gallery.gallery_type as type,
+		tbl_gallery.gallery_addr as addr,
+		tbl_gallery.gallery_title as title,
+		tbl_gallery.gallery_terms as terms,
+		tbl_gallery.gallery_size as size,
+		tbl_gallery.gallery_partnerid as partnerid,
+		tbl_gallery.gallery_method as method,
+		tbl_gallery.gallery_id as galleryid,
+		tbl_gallery.gallery_favor as favor,
+		tbl_gallery.gallery_cost as cost,
+		tbl_gallery.gallery_clip as clip,
+		tbl_partners.partners_name as partnername
+	from tbl_gallery inner join tbl_partners
+  	where tbl_gallery.gallery_id=#{galleryId};
+  </select>
+  <select id="partner" resultType="map" parameterType="int">
+ 	select 
+		tbl_partners.partners_id as partnerid,
+		tbl_partners.partners_name as partnername,
+		tbl_partners.partners_img as partnerimg,
+	   	tbl_partners.partners_major as partnermajor,
+	   	tbl_partners.partners_name as partnername,
+	   	tbl_partners.partners_range as partnerrange,
+	   	tbl_partners.partners_specialty as partnerspecialty
+	from tbl_gallery 
+	left join tbl_partners 
+	on (tbl_gallery.gallery_partnerid = tbl_partners.partners_id)
+	where tbl_gallery.gallery_id=#{galleryId};
+ </select>
   
 </mapper>

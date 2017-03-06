@@ -35,6 +35,21 @@ public class GalleryController {
 	public List<Map<String, Object>> GalleryMainImg(@RequestParam("pager") int pager, @RequestParam("viewItems") int viewItems) {
 		return galleryService.getGalleryMainImg(pager, viewItems);
 	}
+	@RequestMapping("/api/gallery/imgs")
+	@ResponseBody
+	public List<Map<String, Object>> GalleryImgs(@RequestParam("galleryId") int galleryId) {
+		return galleryService.getGalleryImgs(galleryId);
+	}
+	@RequestMapping("/api/gallery/detail")
+	@ResponseBody
+	public List<Map<String, Object>> GalleryDetailsInfo(@RequestParam("galleryId") int galleryId) {
+		return galleryService.GalleryDetailsInfo(galleryId);
+	}
+	@RequestMapping("/api/gallery/partner")
+	@ResponseBody
+	public List<Map<String, Object>> GalleryPartner(@RequestParam("galleryId") int galleryId) {
+		return galleryService.GalleryPartner(galleryId);
+	}
 	
 
 }

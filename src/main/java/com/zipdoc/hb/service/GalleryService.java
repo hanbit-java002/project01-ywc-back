@@ -30,12 +30,24 @@ public class GalleryService {
 		listInfo.put("viewItems", viewItems);
 		return galleryDAO.getGalleryLists(listInfo);
 	}
+	
 	public List<Map<String, Object>> getGalleryMainImg (int pager, int viewItems) {
 		int startIndex= getStartIndex(pager,viewItems);
 		Map listInfo = new HashMap();
 		listInfo.put("startIndex", startIndex);
 		listInfo.put("viewItems", viewItems);
 		return galleryDAO.getGalleryMainImg(listInfo);
+	}
+	
+	public List<Map<String, Object>> getGalleryImgs (int galleryId) {
+		return galleryDAO.getGalleryImgs(galleryId);
+	}
+	
+	public List<Map<String, Object>> GalleryDetailsInfo (int galleryId) {
+		return galleryDAO.GalleryDetailsInfo(galleryId);
+	}
+	public List<Map<String, Object>> GalleryPartner (int galleryId) {
+		return galleryDAO.GalleryPartner(galleryId);
 	}
 
 }
