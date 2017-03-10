@@ -39,14 +39,14 @@ public class GalleryService {
 		return galleryDAO.getGalleryMainImg(listInfo);
 	}
 	
-	public List<Map<String, Object>> getGalleryImgs (int galleryId) {
+	public List<Map<String, Object>> getGalleryImgs (String galleryId) {
 		return galleryDAO.getGalleryImgs(galleryId);
 	}
 	
-	public List<Map<String, Object>> GalleryDetailsInfo (int galleryId) {
+	public List<Map<String, Object>> GalleryDetailsInfo (String galleryId) {
 		return galleryDAO.GalleryDetailsInfo(galleryId);
 	}
-	public List<Map<String, Object>> GalleryPartner (int galleryId) {
+	public List<Map<String, Object>> GalleryPartner (String galleryId) {
 		return galleryDAO.GalleryPartner(galleryId);
 	}
 

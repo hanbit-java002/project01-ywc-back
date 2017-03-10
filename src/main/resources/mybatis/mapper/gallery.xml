@@ -8,20 +8,22 @@
   	  FROM zipdoc.tbl_gallery;
   </select> 
   <select id="lists" resultType="map" parameterType="map">
-	SELECT 	gallery_id AS galleryid,
-			gallery_watcher AS watcher,
-			gallery_favor AS favor,
-			gallery_clip AS clip,
-			gallery_title AS title,
-			gallery_addr AS addr,
-			gallery_size AS size,
-			gallery_type AS type,
-			gallery_cost AS cost,
-			gallery_terms AS terms,
-			gallery_method AS method,
-			gallery_partnerid AS partnerid
-  	FROM zipdoc.tbl_gallery 
-  	ORDER BY gallery_id ASC
+	SELECT 		g.gallery_id AS galleryid,
+			g.gallery_watcher AS watcher,
+			g.gallery_favor AS favor,
+			g.gallery_clip AS clip,
+			g.gallery_title AS title,
+			g.gallery_addr AS addr,
+			g.gallery_size AS size,
+			d.space_desc_name AS type,
+			g.gallery_cost AS cost,
+			g.gallery_terms AS terms,
+			g.gallery_method AS method,
+			g.partners_id AS partnerid
+  	FROM zipdoc.tbl_gallery g 
+    left outer join zipdoc.tbl_space_desc d
+    on g.space_desc_id=d.space_desc_id
+  	ORDER BY title ASC
   	LIMIT #{startIndex}, #{viewItems}
   </select>
   <select id="mainimg" resultType="map" parameterType="map">
@@ -30,31 +32,31 @@
   	 where 	gallery_main_img=true 
   	 limit 	#{startIndex}, #{viewItems};
   </select>
-  <select id="imgs" resultType="map" parameterType="int">
+  <select id="imgs" resultType="map" parameterType="string">
   	select gallery_id as galleryid , gallery_imgs as galleryimgs 
   	from tbl_gallery_imgs 
   	where gallery_id=#{galleryId};
   </select>
-  <select id="detailsinfo" resultType="map" parameterType="int">
+  <select id="detailsinfo" resultType="map" parameterType="string">
   	select 
 		tbl_gallery.gallery_id as galleryid, 
 		tbl_gallery.gallery_watcher as watcher,
-		tbl_gallery.gallery_type as type,
+		tbl_space_desc.space_desc_name as type,
 		tbl_gallery.gallery_addr as addr,
 		tbl_gallery.gallery_title as title,
 		tbl_gallery.gallery_terms as terms,
 		tbl_gallery.gallery_size as size,
-		tbl_gallery.gallery_partnerid as partnerid,
+		tbl_gallery.partners_id as partnerid,
 		tbl_gallery.gallery_method as method,
 		tbl_gallery.gallery_id as galleryid,
 		tbl_gallery.gallery_favor as favor,
 		tbl_gallery.gallery_cost as cost,
 		tbl_gallery.gallery_clip as clip,
 		tbl_partners.partners_name as partnername
-	from tbl_gallery inner join tbl_partners
+	from (tbl_gallery inner join tbl_partners) inner join tbl_space_desc
   	where tbl_gallery.gallery_id=#{galleryId};
   </select>
-  <select id="partner" resultType="map" parameterType="int">
+  <select id="partner" resultType="map" parameterType="string">
  	select 
 		tbl_partners.partners_id as partnerid,
 		tbl_partners.partners_name as partnername,
@@ -65,7 +67,7 @@
 	   	tbl_partners.partners_specialty as partnerspecialty
 	from tbl_gallery 
 	left join tbl_partners 
-	on (tbl_gallery.gallery_partnerid = tbl_partners.partners_id)
+	on (tbl_gallery.partners_id = tbl_partners.partners_id)
 	where tbl_gallery.gallery_id=#{galleryId};
  </select>
   

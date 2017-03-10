@@ -37,17 +37,17 @@ public class GalleryController {
 	}
 	@RequestMapping("/api/gallery/imgs")
 	@ResponseBody
-	public List<Map<String, Object>> GalleryImgs(@RequestParam("galleryId") int galleryId) {
+	public List<Map<String, Object>> GalleryImgs(@RequestParam("galleryId") String galleryId) {
 		return galleryService.getGalleryImgs(galleryId);
 	}
 	@RequestMapping("/api/gallery/detail")
 	@ResponseBody
-	public List<Map<String, Object>> GalleryDetailsInfo(@RequestParam("galleryId") int galleryId) {
+	public List<Map<String, Object>> GalleryDetailsInfo(@RequestParam("galleryId") String galleryId) {
 		return galleryService.GalleryDetailsInfo(galleryId);
 	}
 	@RequestMapping("/api/gallery/partner")
 	@ResponseBody
-	public List<Map<String, Object>> GalleryPartner(@RequestParam("galleryId") int galleryId) {
+	public List<Map<String, Object>> GalleryPartner(@RequestParam("galleryId") String galleryId) {
 		return galleryService.GalleryPartner(galleryId);
 	}
 	
