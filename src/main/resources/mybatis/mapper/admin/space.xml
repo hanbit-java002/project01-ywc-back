@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin.space">
+	<select id="selectList" resultType="map">
+	     SELECT	s.space_id, s.space_name, desc_num, count(g.gallery_id) gallery_num 
+	       FROM	(
+	     SELECT s.space_id, s.space_name, count(sd.space_desc_id) desc_num
+	       FROM	tbl_space s 
+	       LEFT 
+		  OUTER 
+		   JOIN tbl_space_desc sd 
+		     ON	s.space_id = sd.space_id
+	   GROUP BY	s.space_id
+	   ORDER BY space_name DESC) s
+		   LEFT 
+		  OUTER 
+		   JOIN tbl_gallery g 
+			 ON	s.space_id=g.space_id 
+	   GROUP BY s.space_id
+	   ORDER BY space_name DESC;
+	</select>
+
+  
+</mapper>

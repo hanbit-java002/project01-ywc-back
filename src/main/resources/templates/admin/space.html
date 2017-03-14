@@ -1,0 +1,50 @@
+{{>admin/header}}
+<div class="admin-title">공간관리</div>
+<section class="admin-list">
+	<div class="admin-space">
+		<div class="admin-sub-title">공간</div>
+		<table class="table table-striped table-hover table-condensed">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>공간명</th>
+					<th>공간ID</th>
+					<th>세부공간수</th>
+					<th>갤러리수</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+		<div class="admin-buttons">
+			<button more="admin-space-add" class="btn-admin-add btn btn-success">공간 추가</button>
+		</div>
+	</div>
+	<div class="admin-space-desc">
+		<div class="admin-sub-title">세부공간</div>
+		<table class="table table-striped table-hover table-condensed">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>세부공간명</th>
+					<th>세부공간ID</th>
+					<th>공간명</th>
+					<th>갤러리수</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+		<div class="admin-buttons">
+			<button more="admin-space-desc-add" class="btn-admin-add btn btn-success">세부공간 추가</button>
+		</div>
+	</div>
+</section>
+<section class ="admin-add admin-space-add">
+	admin-space-add
+</section>
+<section class ="admin-add admin-space-desc-add">
+	admin-space-desc-add
+</section>
+
+{{>admin/footer}}

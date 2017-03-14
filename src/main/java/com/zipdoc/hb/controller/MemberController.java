@@ -1,4 +1,4 @@
-package com.zipdoc.hb.controler;
+package com.zipdoc.hb.controller;
 
 import java.util.HashMap;
 import java.util.Map;
