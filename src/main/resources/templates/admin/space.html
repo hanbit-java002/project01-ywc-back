@@ -41,10 +41,32 @@
 	</div>
 </section>
 <section class ="admin-add admin-space-add">
-	admin-space-add
+	<div class="form-group">
+    	<label for="add-space_name">공간명</label>
+    	<input type="text" class="form-control" id="add-space_name" placeholder="공간명">
+	</div>
+	<div class="admin-buttons">
+		<button class="btn-admin-save btn btn-success">저장</button>
+		<button class="btn-admin-cancel btn btn-default">취소</button>
+	</div>
 </section>
 <section class ="admin-add admin-space-desc-add">
-	admin-space-desc-add
+	<div class="form-group">
+    	<label for="add-space_name">세부공간명</label>
+    	<input type="text" class="form-control" id="add-space-desc_name" placeholder="세부공간명">
+  		<div class="dropdown">
+		  <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    <div id="btn-txt-add-space-desc">공간선택</div>
+		    <span class="caret"></span>
+		  </button>
+		  <ul id="add-space" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+		  </ul>
+		</div>
+	</div>
+	<div class="admin-buttons">
+		<button class="btn-admin-save btn btn-success">저장</button>
+		<button class="btn-admin-cancel btn btn-default">취소</button>
+	</div>
 </section>
 
 {{>admin/footer}}
