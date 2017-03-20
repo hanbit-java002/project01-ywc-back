@@ -56,16 +56,54 @@
     	<input type="text" class="form-control" id="add-space-desc_name" placeholder="세부공간명">
   		<div class="dropdown">
 		  <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		    <div id="btn-txt-add-space-desc">공간선택</div>
+		    <div name="btn-txt-space">공간선택</div>
 		    <span class="caret"></span>
 		  </button>
-		  <ul id="add-space" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+		  <ul name="add-space" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 		  </ul>
 		</div>
 	</div>
 	<div class="admin-buttons">
 		<button class="btn-admin-save btn btn-success">저장</button>
 		<button class="btn-admin-cancel btn btn-default">취소</button>
+	</div>
+</section>
+<section class ="admin-update admin-space-update">
+	<div class="form-group">
+    	<label for="upt-space_id">공간ID</label>
+    	<input type="text" class="form-control" id="upt-space_id" disabled>
+	</div>
+	<div class="form-group">
+    	<label for="upt-space_name">공간명</label>
+    	<input type="text" class="form-control" id="upt-space_name">
+	</div>
+	<div class="admin-buttons">
+	  <button class="btn-admin-update btn btn-success">수정</button>
+      <button class="btn-admin-delete btn btn-danger">삭제</button>
+      <button class="btn-admin-cancel btn btn-default">취소</button>
+	</div>
+</section>
+<section class ="admin-update admin-space-desc-update">
+	<div class="form-group">
+    	<label for="upt-space_desc_id">세부공간ID</label>
+    	<input type="text" class="form-control" id="upt-space_desc_id" disabled>
+	</div>
+	<div class="form-group">
+    	<label for="upt-space_desc_name">세부공간명</label>
+    	<input type="text" class="form-control" id="upt-space_desc_name">
+	</div>
+	<div class="dropdown">
+	  <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    <div name="btn-txt-space">공간선택</div>
+	    <span class="caret"></span>
+	  </button>
+	  <ul name="add-space" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+	  </ul>
+	</div>
+	<div class="admin-buttons">
+	  <button class="btn-admin-update btn btn-success">수정</button>
+      <button class="btn-admin-delete btn btn-danger">삭제</button>
+      <button class="btn-admin-cancel btn btn-default">취소</button>
 	</div>
 </section>
 

@@ -23,7 +23,7 @@
 	</select>
 	
 	<select id="selectDescList" resultType ="map">
-		  SELECT r.space_desc_id, space_desc_name, s.space_name, r.gallery_num 
+		  SELECT r.space_desc_id, space_desc_name, s.space_name, r.gallery_num, r.space_id 
 		    FROM (SELECT sd.space_desc_id, space_desc_name, sd.space_id, count(g.gallery_id) gallery_num 
 		    FROM tbl_space_desc sd left outer join tbl_gallery g
 		      ON g.space_desc_id=sd.space_desc_id

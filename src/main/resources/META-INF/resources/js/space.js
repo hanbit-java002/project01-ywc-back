@@ -4,6 +4,39 @@ require([
 	var currentStore= {};
 	var common = require("common");
 	
+	
+	function getSpaceDropBox(spaceId, section) {
+		$.ajax({
+			url:"/admin/api/space/list",
+			success: function(list) {
+				var itemsHTML="";
+				for (var i=0; i<list.length; i++) {
+					var item = list[i];
+					itemsHTML += "<li><a href='#' item-id='";
+					itemsHTML += item["space_id"] + "'>";
+					itemsHTML += item["space_name"];
+					itemsHTML += "</a></li>";
+					/* 스페이스아디가 있을때 잡아주기*/
+					if (spaceId !==null && spaceId === item["space_id"]) {
+						console.log("hihi");
+						$(section+" [name='btn-txt-space']").text(item["space_name"]);
+						currentStore.spaceId = spaceId;
+					}
+				}
+				$("[name='add-space']").html(itemsHTML);
+				
+				$("[name='add-space'] li a").on("click", function(event) {
+					event.preventDefault();
+					var codeName = $(this).text();
+					$(section+" [name='btn-txt-space']").text(codeName);
+					var codeId=$(this).attr("item-id");
+					currentStore.spaceId = codeId;
+				});
+				
+			}
+		});
+	}
+	
 	var handler = function(section, jqElement) {
 		if (section === ".admin-list") {
 			loadList();
@@ -13,31 +46,23 @@ require([
 		}
 		else if (section === ".admin-space-desc-add") {
 			$("#add-space-desc_name").val("");			
-			
-			$.ajax({
-				url:"/admin/api/space/list",
-				success: function(list) {
-					var itemsHTML="";
-					for (var i=0; i<list.length; i++) {
-						var item = list[i];
-						itemsHTML += "<li><a href='#' item-id='";
-						itemsHTML += item["space_id"] + "'>";
-						itemsHTML += item["space_name"];
-						itemsHTML += "</a></li>";
-					}
-					$("#add-space").html(itemsHTML);
-					$("#add-space li a").on("click", function(event) {
-						event.preventDefault();
-						var codeName = $(this).text();
-						$("#btn-txt-add-space-desc").text(codeName);
-						var codeId=$(this).attr("item-id");
-						currentStore.spaceId = codeId;
-					});
-					
-				}
-			});
+			getSpaceDropBox(null, section);
+
+		}
+		else if (section === ".admin-space-update") {
+			$("#upt-space_id").val("");
+			var spaceId=jqElement.attr("space-id");
+			$("#upt-space_id").val(spaceId);
+		}
+		else if (section === ".admin-space-desc-update") {
+			$("#upt-space_desc_id").val("");
+			var spaceDescId=jqElement.attr("space-desc-id");
+			var spaceId=jqElement.attr("space-id");
+			$("#upt-space_desc_id").val(spaceDescId);
+			getSpaceDropBox(spaceId, section);
 		}
 	}
+	
 	function loadList() {
 		$.ajax({
 			url: "/admin/api/space/list",
@@ -58,7 +83,7 @@ require([
 				
 				$(".admin-list .admin-space table>tbody").html(itemHTML);
 				$(".admin-list .admin-space table>tbody>tr").on("click", function() {
-					//common.showSection(".admin-update", $(this), handler);
+					common.showSection(".admin-space-update", $(this), handler);
 				});
 			},
 		});
@@ -70,7 +95,7 @@ require([
 				for (var i=0; i<list.length; i++) {
 					var item = list[i];
 					
-					itemHTML += "<tr space-desc-id='" + item.space_desc_id + "'>";
+					itemHTML += "<tr space-id='"+item.space_id+"' space-desc-id='" + item.space_desc_id + "'>";
 					itemHTML += "<td>" + (i+1) + "</td>";
 					itemHTML += "<td>" + item.space_desc_name + "</td>";
 					itemHTML += "<td>" + item.space_desc_id + "</td>";
@@ -80,12 +105,13 @@ require([
 				}
 				
 				$(".admin-list .admin-space-desc table>tbody").html(itemHTML);
-				$(".admin-list .admin-space table>tbody>tr").on("click", function() {
-					//common.showSection(".admin-update", $(this), handler);
+				$(".admin-list .admin-space-desc table>tbody>tr").on("click", function() {
+					common.showSection(".admin-space-desc-update", $(this), handler);
 				});
 			},
 		});
 	}
+	
 	$(".admin-space-add .btn-admin-save").on("click", function() {
 		var spaceName=$("#add-space_name").val().trim();	
 		
