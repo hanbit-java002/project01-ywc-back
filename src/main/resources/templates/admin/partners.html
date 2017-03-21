@@ -1,3 +1,48 @@
 {{>admin/header}}
-파트너임
+<div class="admin-title">파트너관리</div>
+<section class="admin-list">
+	<table class="table table-striped table-hover table-condensed">
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>파트너명</th>
+				<th>파트너ID</th>
+				<th>시공</th>
+				<th>전문분야</th>
+				<th>지역</th>
+				<th>시공한 갤러리</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+	<div class="admin-buttons">
+		<button class="btn-admin-add btn btn-success">공간 추가</button>
+	</div>
+</section>
+<section class="admin-add">
+	<div class="form-group">
+    	<label for="add-partner_name">파트너명</label>
+    	<input type="text" class="form-control" id="add-partner_name" placeholder="파트너명">
+    	<label for="add-partner_desc">파트너상세설명</label>
+    	<textarea type="text" class="form-control" id="add-partner_desc" placeholder="파트너상세설명"></textarea>
+    	<label for="add-partner_major">시공</label>
+    	<input type="text" class="form-control" id="add-partner_major" placeholder="시공">
+    	<label for="add-partner_specialty">전문분야</label>
+    	<input type="text" class="form-control" id="add-partner_specialty" placeholder="전문분야">
+    	<label for="add-partner_range">지역</label>
+    	<input type="text" class="form-control" id="add-partner_range" placeholder="지역">
+    	<label for="add-partner_img">이미지</label>
+    	<input type="file" id="add-partner_img" class="hidden" placeholder="대표이미지" accept="image/*">
+    	<button class="btn-admin-file btn btn-primary" for="add-partner_img">파일 선택</button>
+	</div>
+	<div class="admin-buttons">
+		<button class="btn-admin-save btn btn-success">저장</button>
+		<button class="btn-admin-cancel btn btn-default">취소</button>
+	</div>
+</section>
+<section class="admin-update">
+	업데이트
+</section>
+
 {{>admin/footer}}

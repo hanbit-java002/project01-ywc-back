@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin.partner">
+	<select id="selectList" resultType="map">
+		SELECT partners_id, partners_name, partners_desc, partners_major, partners_specialty,
+			   partners_range, partners_img
+		  FROM tbl_partners
+	</select>
+
+  
+</mapper>

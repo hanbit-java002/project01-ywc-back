@@ -10,7 +10,6 @@ public class WebApplicationConfig extends WebMvcConfigurerAdapter {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/static/**")
 			.addResourceLocations("file:/users/hb/hanbit/webstormpjt/project01-front/dist/");
-		
 	}
 	
 }

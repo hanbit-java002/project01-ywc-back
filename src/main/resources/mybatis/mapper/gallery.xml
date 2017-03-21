@@ -38,23 +38,23 @@
   	where gallery_id=#{galleryId};
   </select>
   <select id="detailsinfo" resultType="map" parameterType="string">
-  	select 
-		tbl_gallery.gallery_id as galleryid, 
-		tbl_gallery.gallery_watcher as watcher,
-		tbl_space_desc.space_desc_name as type,
-		tbl_gallery.gallery_addr as addr,
-		tbl_gallery.gallery_title as title,
-		tbl_gallery.gallery_terms as terms,
-		tbl_gallery.gallery_size as size,
-		tbl_gallery.partners_id as partnerid,
-		tbl_gallery.gallery_method as method,
-		tbl_gallery.gallery_id as galleryid,
-		tbl_gallery.gallery_favor as favor,
-		tbl_gallery.gallery_cost as cost,
-		tbl_gallery.gallery_clip as clip,
-		tbl_partners.partners_name as partnername
-	from (tbl_gallery inner join tbl_partners) inner join tbl_space_desc
-  	where tbl_gallery.gallery_id=#{galleryId};
+    select 
+		g.gallery_id as galleryid, 
+		g.gallery_watcher as watcher,
+		sd.space_desc_name as type,
+		g.gallery_addr as addr,
+		g.gallery_title as title,
+		g.gallery_terms as terms,
+		g.gallery_size as size,
+		g.partners_id as partnerid,
+		g.gallery_method as method,
+		g.gallery_id as galleryid,
+		g.gallery_favor as favor,
+		g.gallery_cost as cost,
+		g.gallery_clip as clip,
+		partners_name as partnername
+	from (tbl_gallery g LEFT OUTER JOIN tbl_space_desc sd ON g.space_desc_id=sd.space_desc_id) inner join tbl_partners
+  	where g.gallery_id=#{galleryId}
   </select>
   <select id="partner" resultType="map" parameterType="string">
  	select 
@@ -68,7 +68,7 @@
 	from tbl_gallery 
 	left join tbl_partners 
 	on (tbl_gallery.partners_id = tbl_partners.partners_id)
-	where tbl_gallery.gallery_id=#{galleryId};
+	where tbl_gallery.gallery_id=#{galleryId}
  </select>
   
 </mapper>

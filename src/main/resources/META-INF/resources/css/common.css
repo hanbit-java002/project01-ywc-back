@@ -6,6 +6,10 @@ ul {
 	margin: 0px;
 	padding: 0px;
 }
+.block {
+	display: block;
+}
+
 
 header {
 	position: fixed;
@@ -79,6 +83,10 @@ header {
 }
 .admin-add {
 	display: none;
+}
+[name='btn-txt-space'] {
+	display: inline-block;
+	
 }
 
 

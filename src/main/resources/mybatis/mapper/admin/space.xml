@@ -41,6 +41,19 @@
 		INSERT INTO tbl_space_desc (space_desc_id, space_desc_name, space_id)
 		     VALUES(#{spaceDescId}, #{spaceDescName}, #{spaceId})
 	</insert>
+	
+	<update id="updateSpace" parameterType="map">
+		UPDATE tbl_space
+		   SET space_name=#{spaceName}
+		 WHERE space_Id=#{spaceId}
+	</update>
+	
+	<update id="updateSpaceDesc" parameterType="map">
+		UPDATE tbl_space_desc
+		   SET space_desc_name=#{spaceDescName},
+		       space_id=#{spaceId}
+		 WHERE space_desc_Id=#{spaceDescId}
+	</update>
 
   
 </mapper>

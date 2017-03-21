@@ -19,6 +19,22 @@ public class SpaceDAO {
 	public List selectDescList(){
 		return sqlSession.selectList("admin.space.selectDescList");
 	}
+	
+	public int updateSpace (String spaceId, String spaceName) {
+		Map param = new HashMap();
+		param.put("spaceId", spaceId);
+		param.put("spaceName", spaceName);
+		return sqlSession.update("admin.space.updateSpace",param);
+	}
+	
+	public int updateSpaceDesc(String spaceDescId, String spaceId, String spaceDescName) {
+		Map param = new HashMap();
+		param.put("spaceDescId", spaceDescId);
+		param.put("spaceId", spaceId);
+		param.put("spaceDescName", spaceDescName);
+		return sqlSession.update("admin.space.updateSpaceDesc", param);
+	}
+	
 	public int insertSpace(String spaceId,String spaceName) {
 		Map param = new HashMap();
 		param.put("spaceId", spaceId);

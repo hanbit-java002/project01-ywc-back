@@ -16,9 +16,8 @@ require([
 					itemsHTML += item["space_id"] + "'>";
 					itemsHTML += item["space_name"];
 					itemsHTML += "</a></li>";
-					/* 스페이스아디가 있을때 잡아주기*/
+					/* 스페이스아디가 있을때 등록해줌*/
 					if (spaceId !==null && spaceId === item["space_id"]) {
-						console.log("hihi");
 						$(section+" [name='btn-txt-space']").text(item["space_name"]);
 						currentStore.spaceId = spaceId;
 					}
@@ -161,9 +160,52 @@ require([
 			},
 		});
 	});
-	
+
 	$(".btn-admin-cancel").on("click", function() {
 		common.showSection(".admin-list", null, handler);
+	});
+	
+	$(".btn-admin-update").on("click", function() {
+		
+		if ($(this).parent().parent().hasClass("admin-space-update")) {
+			var spaceId=$("#upt-space_id").val().trim();
+			var spaceName=$("#upt-space_name").val().trim();
+			
+			$.ajax({
+				url: "/admin/api/space/update",
+				method: "PUT",
+				data : {
+					spaceName: spaceName,
+					spaceId: spaceId,
+				},
+				success: function() {
+					common.showSection(".admin-list", null, handler);
+				},
+				error: function() {
+					alert("입력실패 했습니다.");
+				},
+			});
+		}
+		else {			
+			var spaceDescId=$("#upt-space_desc_id").val().trim();
+			var spaceDescName=$("#upt-space_desc_name").val().trim();
+			
+			$.ajax({
+				url: "/admin/api/space/desc/update",
+				method: "PUT",
+				data : {
+					spaceDescId : spaceDescId,
+					spaceDescName: spaceDescName,
+					spaceId: currentStore.spaceId,
+				},
+				success: function() {
+					common.showSection(".admin-list", null, handler);
+				},
+				error: function() {
+					alert("입력실패 했습니다.");
+				},
+			});
+		}
 	});
 	
 	common.initMgmt(handler);

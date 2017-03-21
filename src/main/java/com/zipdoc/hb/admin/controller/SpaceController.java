@@ -47,5 +47,26 @@ public class SpaceController {
 		
 		return result;
 	}
+	@RequestMapping(value="/update", method=RequestMethod.PUT)
+	public Map spaceModify(@RequestParam("spaceId") String spaceId, 
+			@RequestParam("spaceName") String spaceName) {
+		spaceService.updateSpace(spaceId, spaceName);
+		
+		Map result = new HashMap();
+		result.put("result", "ok");
+		
+		return result;
+	}
+	@RequestMapping(value="/desc/update", method=RequestMethod.PUT)
+	public Map spaceDescModify(@RequestParam("spaceDescId") String spaceDescId, 
+			@RequestParam("spaceId") String spaceId, 
+			@RequestParam("spaceDescName") String spaceDescName) {
+		spaceService.updateSpaceDesc(spaceDescId,spaceId, spaceDescName);
+		
+		Map result = new HashMap();
+		result.put("result", "ok");
+		
+		return result;
+	}
 
 }
