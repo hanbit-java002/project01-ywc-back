@@ -42,7 +42,29 @@
 	</div>
 </section>
 <section class="admin-update">
-	업데이트
+	<div class="form-group">
+		<label for="upt-partner_id">파트너아이디</label>
+    	<input type="text" class="form-control" id="upt-partner_id" placeholder="파트너ID" disabled>
+    	<label for="upt-partner_name">파트너명</label>
+    	<input type="text" class="form-control" id="upt-partner_name" placeholder="파트너명">
+    	<label for="upt-partner_desc">파트너상세설명</label>
+    	<textarea type="text" class="form-control" id="upt-partner_desc" placeholder="파트너상세설명"></textarea>
+    	<label for="upt-partner_major">시공</label>
+    	<input type="text" class="form-control" id="upt-partner_major" placeholder="시공">
+    	<label for="upt-partner_specialty">전문분야</label>
+    	<input type="text" class="form-control" id="upt-partner_specialty" placeholder="전문분야">
+    	<label for="upt-partner_range">지역</label>
+    	<input type="text" class="form-control" id="upt-partner_range" placeholder="지역">
+    	<label for="upt-partner_img">이미지</label>
+    	<input type="file" id="upt-partner_img" class="hidden" placeholder="대표이미지" accept="image/*">
+    	<button class="btn-admin-file btn btn-primary" for="upt-partner_img">파일 선택</button>
+	</div>
+	<div class="admin-buttons">
+	  <button class="btn-admin-update btn btn-success">수정</button>
+      <button class="btn-admin-delete btn btn-danger">삭제</button>
+      <button class="btn-admin-cancel btn btn-default">취소</button>
+	</div>
 </section>
+
 
 {{>admin/footer}}

@@ -8,6 +8,22 @@
 			   partners_range, partners_img
 		  FROM tbl_partners
 	</select>
+	<select id="selectOne" resultType="map" parameterType="string">
+		SELECT partners_id, partners_name, partners_desc, partners_major, partners_specialty,
+			   partners_range, partners_img
+		  FROM tbl_partners
+		 WHERE partners_id=#{partnerId}
+	</select>
+	
+	<insert id ="insert" parameterType="map">
+		INSERT INTO tbl_partners 
+		       (partners_id, partners_name, partners_desc, 
+		  	    partners_major, partners_specialty, partners_range,
+		        partners_img)
+		VALUES (#{partnerId},#{partnerName},#{partnerDesc},
+			    #{partnerMajor},#{partnerSpecialty},#{partnerRange},
+			    #{partnerImg}) 
+	</insert>
 
   
 </mapper>

@@ -24,7 +24,7 @@ require([
 				
 				$(".admin-list table>tbody").html(itemHTML);
 				$(".admin-list table>tbody>tr").on("click", function() {
-					//common.showSection(".admin-partner-update", $(this), handler);
+					common.showSection(".admin-update", $(this), handler);
 				});
 			},
 		});
@@ -35,10 +35,38 @@ require([
 			loadList();
 		}
 		else if (section ===".admin-add") {
-			
+			$("#add-partner_name").val("");
+	    	$("#add-partner_desc").val(""); 
+	    	$("#add-partner_major").val(""); 
+	    	$("#add-partner_specialty").val("");
+	    	$("#add-partner_range").val("");
+	    	$("#add-partner_img").val("");
 		}
 		else if (section ===".admin-update") {
-			
+			$("#upt-partner_name").val("");
+	    	$("#upt-partner_desc").val(""); 
+	    	$("#upt-partner_major").val(""); 
+	    	$("#upt-partner_specialty").val("");
+	    	$("#upt-partner_range").val("");
+	    	$("#upt-partner_img").val("");
+	    	
+	    	var partnerId =jqElement.attr("partner-id");
+	    	
+	    	$.ajax({
+	    		url:"/admin/api/partner/"+partnerId,
+	    		method: "GET",
+	    		success: function(partner) {
+	    			$("#upt-partner_id").val(partner.partners_id);
+	    			$("#upt-partner_name").val(partner.partners_name);
+	    	    	$("#upt-partner_desc").val(partner.partners_desc); 
+	    	    	$("#upt-partner_major").val(partner.partners_major); 
+	    	    	$("#upt-partner_specialty").val(partner.partners_specialty);
+	    	    	$("#upt-partner_range").val(partner.partners_range);
+	    	    	$("#upt-partner_img").val("");
+	    	    	$(".btn-admin-file").html("<img src='" + partner.partners_img +
+							"?ts=" + Date.now() + "'>");
+				},
+	    	});
 		}
 	};
 	
