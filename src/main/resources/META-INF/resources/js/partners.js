@@ -2,13 +2,23 @@ require([
 	"common",
 ], function() {
 	var common = require("common");
+	var currentPage = 1;
+	var pagesPerPaging = 2;
+	var rowsPerPage = 2;
 	
-	function loadList() {
+	function loadList(page) {
+		currentPage = page;
 		$.ajax({
 			url: "/admin/api/partner/list",
-			success: function(list) {
+			data: {
+				currentPage: currentPage,
+				rowsPerPage: rowsPerPage,
+			},
+			success: function(result) {
 				var itemHTML = "";
-
+				var list= result.list;
+				var count= result.count;
+				
 				for (var i=0; i<list.length; i++) {
 					var item = list[i];
 					itemHTML += "<tr partner-id='" + item.partners_id + "'>";
@@ -26,13 +36,46 @@ require([
 				$(".admin-list table>tbody>tr").on("click", function() {
 					common.showSection(".admin-update", $(this), handler);
 				});
+				
+				//pager
+				
+				var firstPage=1 ;
+				var lastPage = parseInt(count/rowsPerPage) + (count%rowsPerPage >= 0?1:0);
+				var startPage = parseInt((currentPage-1)/pagesPerPaging)*pagesPerPaging+1;
+				var endPage = lastPage <= startPage+pagesPerPaging-1?lastPage: startPage+pagesPerPaging-1;
+				
+				var pagerHtml="";
+				
+			    if (startPage>1) {
+			    	pagerHtml+="<li page="+firstPage+"><a href='#'>&laquo;</a></li>";
+			    	console.log(startPage);
+			    	pagerHtml+="<li page="+(startPage-1)+"><a href='#'>&lt;</a></li>";
+			    }
+			    for (var i= startPage; i<endPage+1;i++){
+			    	pagerHtml+="<li page="+i+"><a href='#'>"+i+"</a></li>";
+			    }
+			    
+			    if (startPage+pagesPerPaging-1< lastPage) {
+				    pagerHtml+="<li page="+(startPage+pagesPerPaging)+"><a href='#'>&gt;</a></li>";
+				    pagerHtml+="<li page="+lastPage+"><a href='#'>&raquo;</a></li>";
+			    }
+			    
+			    $(".admin-paging").html(pagerHtml);
+			    
+				$(".admin-paging>li>a").on("click", function() {
+					var page=$(this).parent().attr("page");
+					loadList(page);
+				});
+			    
 			},
 		});
 	}
 	
+
+	
 	var handler = function(section, jqElement) {
 		if (section ===".admin-list") {
-			loadList();
+			loadList(currentPage);
 		}
 		else if (section ===".admin-add") {
 			$("#add-partner_name").val("");
@@ -41,6 +84,7 @@ require([
 	    	$("#add-partner_specialty").val("");
 	    	$("#add-partner_range").val("");
 	    	$("#add-partner_img").val("");
+	    	$(".btn-admin-file").text("파일선택");
 		}
 		else if (section ===".admin-update") {
 			$("#upt-partner_name").val("");
@@ -104,6 +148,39 @@ require([
 		});
 		
 
+	});
+	$(".btn-admin-update").on("click", function() {
+		var partnerId =$("#upt-partner_id").val();
+		var partnerName =$("#upt-partner_name").val();
+    	var partnerDesc =$("#upt-partner_desc").val(); 
+    	var partnerMajor =$("#upt-partner_major").val(); 
+    	var partnerSpecialty =$("#upt-partner_specialty").val(); 
+    	var partnerRange =$("#upt-partner_range").val();
+    	var partnerImg =$("#upt-partner_img").val();
+    	
+    	var formData = new FormData();
+    	formData.append("partnerName",partnerName);
+    	formData.append("partnerDesc",partnerDesc);
+    	formData.append("partnerMajor",partnerMajor);
+    	formData.append("partnerSpecialty",partnerSpecialty);
+    	formData.append("partnerRange",partnerRange);
+   
+    	
+    	var files = $("#upt-partner_img")[0].files;
+    	
+    	formData.append("partnerImg",files[0]);
+    	
+    	$.ajax({
+    		url:"/admin/api/partner/"+partnerId,
+    		method: "POST",
+    		processData: false,
+    		contentType: false,
+    		data: formData,
+    		success: function() {
+    			common.showSection(".admin-list", null, handler);
+			},
+    	});
+		
 	});
 	
 	$(".btn-admin-cancel").on("click", function() {

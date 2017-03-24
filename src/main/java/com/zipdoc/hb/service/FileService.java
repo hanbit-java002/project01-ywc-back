@@ -1,6 +1,8 @@
 package com.zipdoc.hb.service;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
@@ -39,6 +41,31 @@ public class FileService {
 		}
 		return fileId;
 	}
+	
+	@Transactional
+	public void updateAndSave(String fileId, MultipartFile multipartFile) {
+		delete(fileId);
+		addAndSave(fileId, multipartFile);
+	}
+	
+	@Transactional
+	public void delete(String fileId) {
+		
+		fileDAO.delete(fileId);
+		
+		String filePath = PATH_PREFIX+fileId;
+		File file = new File(filePath);
+		
+		try {
+			FileUtils.forceDelete(file);
+		} catch (FileNotFoundException e) {
+			// Ignore
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		
+	}
+	
 	public String add(String fileId, String fileType ,long fileSize,
 			String fileName) {
 		if (fileId == null) {

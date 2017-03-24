@@ -25,12 +25,36 @@ public class PartnerService {
 	@Autowired
 	private PartnerDAO partnerDAO;
 	
-	public List getList() {
-		return partnerDAO.selectList();
+	public int count() {
+		return partnerDAO.selectOneCount();
+	}
+	
+	public List getList(int currentPage, int rowsPerPage) {
+		int startIndex=(currentPage-1)*rowsPerPage;
+		return partnerDAO.selectList(startIndex, rowsPerPage);
 	}
 	
 	public Map get(String partnerId) {
 		return partnerDAO.selectOne(partnerId);
+	}
+	
+	@Transactional
+	public int update(Map partnerDetail, MultipartFile partnerImgFile){
+		String partnerId =(String) partnerDetail.get("partnerId");
+		String partnerImg = "/api2/file/" +partnerId ;
+		partnerDetail.put("partnerId", partnerId);
+		partnerDetail.put("partnerImg", partnerImg);
+		
+		int result= partnerDAO.update(partnerDetail);
+		fileService.updateAndSave(partnerId, partnerImgFile);
+		
+		return result;
+	}
+	
+	@Transactional
+	public int delete(String partnerId) {
+		fileService.delete(partnerId);		
+		return partnerDAO.delete(partnerId);
 	}
 	
 	@Transactional

@@ -24,5 +24,8 @@ public class FileDAO {
 		param.put("fileName",fileName);
 		return sqlSession.insert("file.insert",param);
 	}
+	public int delete(String fileId) {
+		return sqlSession.delete("file.delete",fileId);
+	}
 
 }

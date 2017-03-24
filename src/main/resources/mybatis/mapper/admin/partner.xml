@@ -3,10 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="admin.partner">
-	<select id="selectList" resultType="map">
+	<select id="selectOneCount" resultType="int" >
+		SELECT Count(partners_id)
+		  FROM tbl_partners
+	</select>
+	<select id="selectList" resultType="map" parameterType="map">
 		SELECT partners_id, partners_name, partners_desc, partners_major, partners_specialty,
 			   partners_range, partners_img
 		  FROM tbl_partners
+		 LIMIT #{startIndex}, #{rowsPerPage}
 	</select>
 	<select id="selectOne" resultType="map" parameterType="string">
 		SELECT partners_id, partners_name, partners_desc, partners_major, partners_specialty,
@@ -14,6 +19,23 @@
 		  FROM tbl_partners
 		 WHERE partners_id=#{partnerId}
 	</select>
+	
+	<update id="update" parameterType="map">
+		UPDATE tbl_partners
+		   SET partners_name = #{partnerName},
+		       partners_desc = #{partnerDesc},
+		       partners_major = #{partnerMajor},
+		       partners_specialty = #{partnerSpecialty},
+			   partners_range = #{partnerRange},
+			   partners_img = #{partnerImg}
+		 WHERE partners_id=#{partnerId}
+	</update>
+	
+	<delete id="delete" parameterType="string">
+		DELETE FROM tbl_partners
+		      WHERE partners_id=#{partnerId}
+	</delete>
+	
 	
 	<insert id ="insert" parameterType="map">
 		INSERT INTO tbl_partners 

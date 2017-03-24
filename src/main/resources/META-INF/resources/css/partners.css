@@ -3,3 +3,11 @@
 .btn-admin-file img {
 	max-width: 200px;
 }
+.admin-paging {
+	display:block;
+	text-align: center;
+}
+.admin-paging>li>a {
+	float:none;
+	margin-left: -5px;
+}
